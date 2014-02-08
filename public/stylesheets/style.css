@@ -1,0 +1,96 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+img{
+	margin:5px;
+	-webkit-transition:0.5s ease;
+	-webkit-animation:img_anime 2s ease;
+
+}
+
+@-webkit-keyframes img_anime{
+	0%{opacity: 0;}
+	100%{opacity: 1;}
+}
+#target{
+	float:left;
+	margin-bottom: 10px;
+	padding: 5px 15px;
+	width:150px;
+	height: 150px;
+	background-color: #efefef;
+	border-radius:5%;
+	border-bottom: 5px solid #ccc;
+	-webkit-transition: 0.3s ease-in-out;
+
+	font: bold 20px/1 "helvetica neue", helvetica, arial, sans-serif;
+	text-align: center;
+	vertical-align: middle;
+
+}
+#text{
+	clear: both;
+}
+#img_progress{
+	display: inline-block;
+
+	margin-top: 65px;
+	margin-left: 15px;
+}
+#progress{
+	margin-bottom: 5px;
+}
+#img_progress img{
+	background-color:#efefef;
+	width:96px;
+	height:96px;
+}
+
+#receive img{
+	margin-left: 5px;
+	width:96px;
+	height:96px;
+}
+
+#receive h1{
+	padding: 5px 0px;
+	border-bottom: 1px dashed #ccc;
+}
+
+output{
+	margin: 0;
+	padding: 0;
+}
+ul.chat{
+	margin: 0;
+	padding: 0;
+}
+
+li{
+	display: inline-block;
+	margin-right: 5px;
+	margin-top: 5px;
+	padding: 3px 8px;
+	color:#fff;
+	background-color: #4671D5;
+	border-radius: 10px;
+}
+
+.you{
+	background-color: #4671D5;
+}
+.friend{
+	background-color: #000;
+}
+
+.chat{
+	padding: 5px 0px;
+	border-bottom: 1px dashed #ccc;
+}
+

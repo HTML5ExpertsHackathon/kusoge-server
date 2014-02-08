@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>PeerJS chat demo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Language" content="en-us">
+
+    <script type="text/javascript" src="/javascripts/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/javascripts/peer.0.3.7.min.js"></script>
+
+    <script>
+      // for sctp version mismatching, configuration below is safe in current state.
+      util.supports.sctp = false;
+
+        // Connect to PeerJS, have server assign an ID instead of providing one
+        // Showing off some of the configs available with PeerJS :).
+        var peerjsLauncher = function(address, port, key){
+
+
+            var peer = new Peer('kusoge-server',  {
+                host: address,
+                port: port,
+                key: key,
+                'config':{'iceServers': [
+                    {'url': "stun:stun.l.google.com:19302"},
+                    {'url': 'turn:153.149.7.185:443?transport=tcp', 'username': 'iac', 'credential': 'webcore'}
+                ]},
+                secure: false,
+                debug: 3,
+                logFunction: function() {
+                }
+            });
+
+            var connectedPeers = {};
+
+            // Show this peer's ID.
+            peer.on('open', function(id){
+                console.log('This id : ' + id);
+            });
+
+            // Await connections from others
+            peer.on('connection', connect);
+
+            // Handle a connection object.
+            function connect(c) {
+                // Handle a chat connection.
+                if (c.label === 'chat') {
+
+                    console.log('Connected with ' + c.peer );
+
+                    c.on('data', function(data) {
+                        console.log(c.peer + ': ' + data);
+                    });
+                    c.on('close', function() {
+                        console.log(c.peer + ' has left the chat.');
+
+                        delete connectedPeers[c.peer];
+                    });
+                } 
+            }
+
+
+        };
+
+
+        window.onunload = window.onbeforeunload = function(e) {
+            if (!!peer && !peer.destroyed) {
+                peer.destroy();
+            }
+        };
+
+
+        window.onload = function() {
+
+            var address = "peerserver.skyway.io";
+            var port = "9000";
+            var key = 'sacdj23r2fjx7q93f';
+
+            peerjsLauncher(address, port, key);
+
+        };
+
+
+    </script>
+</head>
+
+<body>
+</body>
+</html> 

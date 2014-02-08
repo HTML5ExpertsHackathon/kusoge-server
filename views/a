@@ -1,0 +1,11 @@
+<script src="https://skyway.io/dist/0.3/peer.js"></script>
+<script>
+var peer = new Peer(myId, {key: 'yourApiKey'});
+peer.on('open', function(id) {
+    var conn = peer.connect('anotherId');
+    conn.on('open', function() {
+        conn.send('hello world');
+    });
+)};
+</script>
+</body>
